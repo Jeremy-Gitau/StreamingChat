@@ -3,7 +3,9 @@
 A Compose Multiplatform chat app (Android, iOS, Desktop) that streams AI replies token by token from a local [Ollama](https://ollama.com) server, including the model's live "thinking" output.
 
 - **Two streaming engines**, switchable at runtime in settings: a hand-built SSE pipeline on Ktor, or [JetBrains Koog](https://github.com/JetBrains/koog).
-- **Ollama** must be running on `localhost:11434` (the Android emulator uses `10.0.2.2:11434`). The default model is `nemotron-3-super:cloud`.
+- **Ollama** powers the replies. The app uses `nemotron-3-super:cloud` by default; pull and run it with `ollama run nemotron-3-super:cloud`, or use any model you like.
+  - Change the model in `shared/src/commonMain/.../domain/model/AiModel.kt` (`ModelCatalog`).
+  - Change the server URL in the platform `HttpClientFactory.*.kt` files (`defaultOllamaBaseUrl`). It defaults to `localhost:11434`, or `10.0.2.2:11434` on the Android emulator.
 - Uses Koin for DI, retries failed streams, and lets you set a system prompt.
 
 * [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
