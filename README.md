@@ -1,4 +1,10 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# StreamingChat
+
+A Compose Multiplatform chat app (Android, iOS, Desktop) that streams AI replies token by token from a local [Ollama](https://ollama.com) server, including the model's live "thinking" output.
+
+- **Two streaming engines**, switchable at runtime in settings: a hand-built SSE pipeline on Ktor, or [JetBrains Koog](https://github.com/JetBrains/koog).
+- **Ollama** must be running on `localhost:11434` (the Android emulator uses `10.0.2.2:11434`). The default model is `nemotron-3-super:cloud`.
+- Uses Koin for DI, retries failed streams, and lets you set a system prompt.
 
 * [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
   you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
