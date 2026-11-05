@@ -17,7 +17,7 @@ sealed interface ChatEvent {
     ) : ChatEvent
 
     data class Finished(
-        val reafson: FinishReason,
+        val reason: FinishReason,
     ) : ChatEvent
 
     data object ReclassifyTextAsThinking : ChatEvent

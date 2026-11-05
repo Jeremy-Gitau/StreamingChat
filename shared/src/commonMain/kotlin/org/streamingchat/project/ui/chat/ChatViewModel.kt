@@ -173,7 +173,10 @@ class ChatViewModel(
     }
 
     private fun copyMessage(id: Long) {
-        val text = state.value.messages.firstOrNull { it.id == id }?.text ?: return
+        val text =
+            state.value.messages
+                .firstOrNull { it.id == id }
+                ?.text ?: return
         _events.trySend(ChatUiEvent.CopyToClipboard(text))
     }
 
@@ -214,8 +217,7 @@ class ChatViewModel(
                     .onEach { event ->
                         if (event is ChatEvent.Retrying) startedAt = TimeSource.Monotonic.markNow() // backoff is not thinking
                         updateMessage(replyId) { it.reduce(event).stampThinkingTime(event, startedAt) }
-                    }
-                    .onCompletion { cause -> finishReply(replyId, cause) }
+                    }.onCompletion { cause -> finishReply(replyId, cause) }
                     .catch { /* recorded by onCompletion; detailed errors come later */ }
                     .collect()
             }
